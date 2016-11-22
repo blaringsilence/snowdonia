@@ -71,28 +71,28 @@ def home():
 
 @app.route('/api/v1/emission/<vehicleID>', methods=['POST'])
 def register_emission(vehicleID): 
-# utc default format
-	latitude, longitude = float(request.form['latitude']), float(request.form['longitude'])
-	if not in_range(latitude, longitude):
-		return 'Too far', 400
-	record = Vehicle.query.filter_by(id=vehicleID).first()
-	if record is None:
-		vehicle_type = request.form['type'].lower()
-		if not validate_vehicle(vehicleID, vehicle_type):
-			return 'Vehicle ID or vehicle type is invalid.', 400
-		vehicle = Vehicle(vehicleID, vehicle_type)
-		db.session.add(vehicle)
-		db.session.commit()
 	try:
-		timestamp = datetime.strptime(request.form['timestamp'], '%a %b %d %H:%M:%S %Y')
+		# 1. Validate
+		latitude, longitude = float(request.form['latitude']), float(request.form['longitude'])
+		timestamp = datetime.strptime(request.form['timestamp'], '%d-%m-%Y %H:%M:%S')
 		heading = int(request.form['heading'])
-		if not validate_point(latitude, longitude, heading):
-			return 'Co-ordinates or heading is incorrect.', 400
+		if not in_range(latitude, longitude) or not validate_point(latitude, longitude, heading):
+			return 'Co-ordinates/heading invalid.', 400
+		# 2. Register vehicle if not registered
+		record = Vehicle.query.filter_by(id=vehicleID).first()
+		if record is None:
+			vehicle_type = request.form['type'].lower()
+			if not validate_vehicle(vehicleID, vehicle_type):
+				return 'Vehicle ID or vehicle type is invalid.', 400
+			vehicle = Vehicle(vehicleID, vehicle_type)
+			db.session.add(vehicle)
+			db.session.commit()
+		# 3. Register emission
 		emission = Emission(vehicleID, latitude, longitude, timestamp, heading)
 		db.session.add(emission)
 		db.session.commit()
-	except ValueError as e:
-		return e, 400
+	except ValueError:
+		return 'Invalid value(s) provided.', 400
 	return 'Success!', 200
 
 
