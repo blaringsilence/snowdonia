@@ -43,10 +43,7 @@ Installation
 	$ sudo -u postgres createuser -s $USER
 	$ createdb -U $USER snowdonia
 
-5. Create a config.py file in the (second) snowdonia dir with the following (replace USER and PASSWORD with your postgresql user and password)
-::
-	SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://USER:PASSWORD@localhost/snowdonia'
-	SQLALCHEMY_TRACK_MODIFICATIONS = False
+5. Edit the config.py file in the (second) snowdonia dir (replace USER and PASSWORD with your postgresql user and password)
 
 6. Create the database tables. In a python interpreter:
 ::

@@ -3,7 +3,6 @@ run.py
 create_db.py
 
 # Config
-config.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
