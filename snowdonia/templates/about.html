@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block middle %}
+
+			<div class="col-xs-12 col-md-4 about">
+				<h2>About</h2>
+				<p>
+					With Snowdonia's transportation force nearing 1000 vehicles, between trains, trams, taxis, and buses, it's become increasingly important to collect data about the entire transportation system in order to optimize its use, as well as improve it in the future.
+				</p>
+				<p>
+					This API provides endpoints to collect, as well as provide data relating to the public transportation system.
+				</p>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<h2>Send Data</h2>
+				<p>
+					To register a public transport vehicle, send a POST request to:
+					<br>
+					<b class="code">{{ url_for('register_emission', vehicleID='INSERT_VEHICLE_UUID4')}}</b>
+					<br>
+					with the following data:
+				</p>
+				<p>
+					<ul class="list-unstyled code">{
+						
+							<li>'latitude': float between -90 and 90,</li>
+							<li>'longitude': float between -180 and 180,</li>
+							<li>'type': 'taxi', 'bus', 'tram', or 'train',</li>
+							<li>'heading': int angle between 0 (true North) and 359,</li>
+							<li>'timestamp': time in the format DAY-MONTH-YEAR HOUR:MIN:SEC, all numbers with leading zeroes (day, month) and full year (e.g. 2016)</li>
+						}</ul>
+				</p>
+			</div>
+{% endblock %}
+
+{% block nav %}
+	<li>See <a href="{{ url_for('data') }}">the data</a></li>
+{% endblock %}

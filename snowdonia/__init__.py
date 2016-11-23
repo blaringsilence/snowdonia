@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from math import radians, asin, sqrt, sin, cos
@@ -58,7 +58,7 @@ def distance_from_center(latitude, longitude): # Haversine formula
     distance = 2 * earth_radius *\
                asin(\
                 sqrt(pow(sin(a), 2)\
-                + cos(lat_rad) * cos(lat_center) * pow(sin(b),2))\
+                + cos(lat_rad) * cos(lat_center) * pow(sin(b), 2))\
                 )
     return distance
 
@@ -69,7 +69,11 @@ def in_range(latitude, longitude):
 
 @app.route('/')
 def home():
-    return 'Snowdonia!'
+    return render_template('about.html')
+
+@app.route('/data')
+def data():
+    return render_template('data.html')
 
 @app.route('/api/v1/emission/<vehicleID>', methods=['POST'])
 def register_emission(vehicleID): 
