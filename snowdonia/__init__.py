@@ -5,7 +5,7 @@ API
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from math import radians, asin, sqrt, sin, cos, atan, tan, pi, atan2
+from math import radians, sqrt, sin, cos, atan, tan, pi, atan2
 import re
 
 app = Flask(__name__)
@@ -82,18 +82,6 @@ def valid_point(lat_val, long_val, heading):
     in_city = in_range(lat_val, long_val) if lat_valid and long_valid else False
     return in_city and heading_valid
 
-def haversine(latitude, longitude):
-    earth_radius = 6371 # kms
-    lat_rad, long_rad = radians(latitude), radians(longitude)
-    lat_center, long_center = snowdonia_center
-    a = (lat_rad - lat_center) / 2
-    b = (long_rad - long_center) / 2
-    distance = 2 * earth_radius *\
-               asin(\
-                sqrt(pow(sin(a), 2)\
-                + cos(lat_rad) * cos(lat_center) * pow(sin(b), 2))\
-                )
-    return distance
 
 def distance_from_center(latitude, longitude): 
     """Calculates the distance between the provided point and the town center
