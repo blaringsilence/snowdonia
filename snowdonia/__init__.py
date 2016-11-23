@@ -1,15 +1,15 @@
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import re
-from sqlalchemy.exc import IntegrityError
 from math import radians, asin, sqrt, sin, cos
+import re
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
+
 valid_types = ['taxi', 'bus', 'tram', 'train']
-snowdonia_center = (radians(53.068889), radians(-4.075556)) # (lat, long)
+snowdonia_center = (radians(53.068889), radians(-4.075556)) #(lat, long)
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
@@ -42,12 +42,12 @@ def valid_vehicle(vID, vType):
     match = uuid4hex.match(vID)
     return match is not None and vType in valid_types
 
-
-def valid_point(latitude, longitude, heading):
-    lat_valid = latitude >= -90 and latitude <= 90
-    long_valid = longitude >= -180 and longitude <= 180
+def valid_point(lat_val, long_val, heading):
+    lat_valid = lat_val >= -90 and lat_val <= 90
+    long_valid = long_val >= -180 and long_val<= 180
     heading_valid = heading >= 0 and heading <= 359
-    return lat_valid and long_valid and heading_valid
+    in_city = in_range(lat_val, long_val) if lat_valid and long_valid else False
+    return in_city and heading_valid
 
 def distance_from_center(latitude, longitude): # Haversine formula
     earth_radius = 6371 # kms
@@ -75,11 +75,14 @@ def home():
 def register_emission(vehicleID): 
     try:
         # 1. Validate
-        latitude, longitude = float(request.form['latitude']), float(request.form['longitude'])
-        timestamp = datetime.strptime(request.form['timestamp'], '%d-%m-%Y %H:%M:%S')
+        latitude = float(request.form['latitude'])
+        longitude = float(request.form['longitude'])
+        timestamp = datetime.strptime(request.form['timestamp'],\
+                    '%d-%m-%Y %H:%M:%S')
         heading = int(request.form['heading'])
-        if not valid_point(latitude, longitude, heading) or not in_range(latitude, longitude):
+        if not valid_point(latitude, longitude, heading):
             return 'Co-ordinates/heading invalid.', 400
+
         # 2. Register vehicle if not registered
         record = Vehicle.query.filter_by(id=vehicleID).first()
         if record is None:
@@ -89,6 +92,7 @@ def register_emission(vehicleID):
             vehicle = Vehicle(vehicleID, vehicle_type)
             db.session.add(vehicle)
             db.session.commit()
+
         # 3. Register emission
         emission = Emission(vehicleID, latitude, longitude, timestamp, heading)
         db.session.add(emission)
