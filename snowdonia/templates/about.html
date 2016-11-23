@@ -1,6 +1,5 @@
 {% extends 'layout.html' %}
 {% block middle %}
-
 			<div class="col-xs-12 col-md-4 about">
 				<h2>About</h2>
 				<p>
@@ -8,6 +7,9 @@
 				</p>
 				<p>
 					This API provides endpoints to collect, as well as provide data relating to the public transportation system.
+				</p>
+				<p>
+					Details about the restrictions of the API can be found <a href="https://github.com/blaringsilence/snowdonia/blob/master/CHALLENGE.md" target="_blank">here</a>.
 				</p>
 			</div>
 			<div class="col-xs-12 col-md-6">
@@ -19,19 +21,12 @@
 					<br>
 					with the following data:
 				</p>
-				<p>
-					<ul class="list-unstyled code">{
-						
-							<li>'latitude': float between -90 and 90,</li>
-							<li>'longitude': float between -180 and 180,</li>
-							<li>'type': 'taxi', 'bus', 'tram', or 'train',</li>
-							<li>'heading': int angle between 0 (true North) and 359,</li>
-							<li>'timestamp': time in the format DAY-MONTH-YEAR HOUR:MIN:SEC, all numbers with leading zeroes (day, month) and full year (e.g. 2016)</li>
-						}</ul>
-				</p>
+				<ul class="list-unstyled code">{
+					<li>'latitude': float between -90 and 90,</li>
+					<li>'longitude': float between -180 and 180,</li>
+					<li>'type': 'taxi', 'bus', 'tram', or 'train',</li>
+					<li>'heading': int angle between 0 (true North) and 359,</li>
+					<li>'timestamp': time in the format DAY-MONTH-YEAR HOUR:MIN:SEC, all numbers with leading zeroes (day, month) and full year (e.g. 2016)</li>
+				}</ul>
 			</div>
-{% endblock %}
-
-{% block nav %}
-	<li>See <a href="{{ url_for('data') }}">the data</a></li>
 {% endblock %}

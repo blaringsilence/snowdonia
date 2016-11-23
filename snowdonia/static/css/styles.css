@@ -1,33 +1,30 @@
 /* SCROLLBAR */
-/* Turn on custom 8px wide scrollbar */
 ::-webkit-scrollbar {
-  width: 10px; /* 1px wider than Lion. */
-  /* This is more usable for users trying to click it. */
+  width: 10px;
   background-color: rgba(0,0,0,0);
   -webkit-border-radius: 100px;
 }
-/* hover effect for both scrollbar area, and scrollbar 'thumb' */
 ::-webkit-scrollbar:hover {
   background-color: rgba(0, 0, 0, 0.09);
 }
- 
 ::-webkit-scrollbar-thumb:vertical {
-  
   background: rgba(0,0,0,0.5);
   -webkit-border-radius: 100px;
   background-clip: padding-box;
   border: 2px solid rgba(0, 0, 0, 0);
-  min-height: 10px; /*Prevent it from getting too small */
+  min-height: 10px; 
 }
 ::-webkit-scrollbar-thumb:vertical:active {
-  background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+  background: rgba(0,0,0,0.61); 
   -webkit-border-radius: 100px;
 }
 /* END SCROLLBAR */
 
+/* GITHUB CORNER */
 .github-corner:hover .octo-arm{
 	animation:octocat-wave 560ms ease-in-out
 }
+
 @keyframes octocat-wave{
 	0%,100%{
 		transform:rotate(0)
@@ -48,10 +45,13 @@
 		animation:octocat-wave 560ms ease-in-out
 	}
 }
+/* END GITHUB CORNER */
+
 body{
 	background-color: #ecf0f1;
 	font-family: 'Dosis', sans-serif;
 }
+
 .top-banner{
 	padding:1em;
 	color: #ecf0f1;
@@ -61,20 +61,22 @@ body{
 	background: -webkit-linear-gradient(to right, #141E30 , #243B55); /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #141E30 , #243B55); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
 }
+
 .top-banner a{
 	padding-top:3em;
 	line-height: 2;
 }
-h1, h2{
-	font-weight: bold;
-}
 
-.about p{
-	text-align: justify;
+h1, h2, .code, a, ul{
+	font-weight: bold;
 }
 
 p{
 	font-size:1.5em;
+}
+
+.about p{
+	text-align: justify;
 }
 
 .code{
@@ -86,25 +88,24 @@ ul.code li{
 }
 
 ul.code{
-	font-weight: bold;
 	font-size:1.3em;
 }
 
 .nav ul{
-	font-weight: bold;
 	font-size:1.5em;
 }
 
-.nav a{
+a{
 	color: #f2b40f;
 	transition-duration: 0.5s;
 }
-.nav a:hover{
+
+a:hover{
 	text-decoration: none;
 	color:#f2910f;
 }
+
 @media (min-width: 992px){
-	
 	.nav ul li{
 		margin-bottom:1em;
 	}
@@ -120,7 +121,3 @@ ul.code{
 	}
 }
 
-.footer{
-	position: absolute;
-	bottom:0;
-}

@@ -9,7 +9,7 @@ app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
 valid_types = ['taxi', 'bus', 'tram', 'train']
-snowdonia_center = (radians(53.068889), radians(-4.075556)) #(lat, long)
+snowdonia_center = (radians(53.068889), radians(-4.075556))
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicles'
@@ -71,10 +71,6 @@ def in_range(latitude, longitude):
 def home():
     return render_template('about.html')
 
-@app.route('/data')
-def data():
-    return render_template('data.html')
-
 @app.route('/api/v1/emission/<vehicleID>', methods=['POST'])
 def register_emission(vehicleID): 
     try:
@@ -103,6 +99,8 @@ def register_emission(vehicleID):
         db.session.commit()
     except ValueError:
         return 'Invalid value(s) provided.', 400
+    except Exception:
+        return 'Unexpected error.', 400
     return 'Success!', 200
 
 

@@ -6,6 +6,7 @@
 		<title>Transport Snowdonia</title>
 		<!--End Metadata-->
 		<!--CSS-->
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/css?family=Dosis|Cutive+Mono" rel="stylesheet">
 		<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
@@ -27,23 +28,20 @@
 		</div>
 		<div class="container">
 			<div class="row">
-		{% block middle %}
-		{% endblock %}
+				{% block middle %}
+				{% endblock %}
 			<div class="col-xs-12 col-md-2 nav">
 				<h2>More..</h2>
 				<ul>
 					{% block nav %}
 					{% endblock %}
 					<li>Read <a href="http://snowdonia.readthedocs.io" target="_blank" title="Docs">the docs</a></li>
+					<li>See Snowdonia <a href="https://goo.gl/maps/bdWSAYTqRMM2" target="_blank" title="Snowdonia on Google Maps">on the map</a></li>
 				</ul>
 			</div>
 			</div>
 		</div>
-
 		<!--Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
 		{% block scripts %}
 		{% endblock %}
 		<!--End Scripts-->
