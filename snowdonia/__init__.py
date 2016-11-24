@@ -244,6 +244,6 @@ def register_emission(vehicleID):
     return 'Success!', 200
 
 
-@app.route('/loaderio-b35b66c04bac9eef37f2343978445837')
+@app.route('/loaderio-b35b66c04bac9eef37f2343978445837/')
 def loader():
     return 'loaderio-b35b66c04bac9eef37f2343978445837'
