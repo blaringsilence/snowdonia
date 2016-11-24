@@ -32,7 +32,6 @@ import re
 import os
 
 app = Flask(__name__)
-# app.config.from_pyfile('config.py')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
@@ -245,3 +244,6 @@ def register_emission(vehicleID):
     return 'Success!', 200
 
 
+@app.route('/loaderio-b35b66c04bac9eef37f2343978445837')
+def loader():
+    return 'loaderio-b35b66c04bac9eef37f2343978445837'
