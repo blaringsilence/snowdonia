@@ -248,3 +248,7 @@ def register_emission(vehicleID):
 @app.route('/loaderio-84b80b047916decb9c20501064268c92/')
 def loader():
     return 'loaderio-84b80b047916decb9c20501064268c92'
+
+@app.route('/test')
+def data():
+    return render_template('data.html')
