@@ -32,8 +32,7 @@ import re
 import os
 
 app = Flask(__name__)
-# app.config.from_pyfile('config.py')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
 
 valid_types = ['taxi', 'bus', 'tram', 'train']
@@ -243,5 +242,3 @@ def register_emission(vehicleID):
     except Exception:
         return 'Error! Did you send the right data fields?', 400
     return 'Success!', 200
-
-
