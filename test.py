@@ -1,9 +1,9 @@
+#!/usr/bin/env python3
 """
 Unit Tests
 ==========
 """
 
-#!/usr/bin/env python3
 import snowdonia
 import unittest
 import time
@@ -31,6 +31,14 @@ class TestCase(unittest.TestCase):
 		vID = uuid.uuid4().hex
 		rv = self.emit(vID, 'taxi', 53.067723, -4.07495, '22-12-2016 00:01:12', 1)
 		assert b'Success!' in rv.data
+
+	def test_invalid_data(self):
+		"""Tests an emission with invalid data."""
+		vID = uuid.uuid4().hex
+		rv = self.app.post('/api/v1/emission/' + vID, data=dict(
+				notSomethingWeWant = 0
+			))
+		assert b'Error!' in rv.data
 
 	def test_invalid_id(self):
 		"""Tests an invalid UUID format."""

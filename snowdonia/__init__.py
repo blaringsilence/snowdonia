@@ -1,6 +1,28 @@
 """
 API
 ===
+
+For the purposes of this API, we decided to skip the hassle of registering, so if
+this is the first time you're using this API, the app will register new vehicles
+on the fly. Just send the data and you're golden.
+
+To send data from a vehicle, point to the following link:
+
+    **/api/v1/emissions/<VEHICLE_UUID>**
+
+Where the vehicle UUID is a valid UUID4.
+
+The request should be of type POST, and the data that are expected by the API are:
+
+- **latitude**: floating point between -90 and 90
+- **longitude**: floating point between -180 and 180
+- **type**: the vehicle's type. Allowed types: taxi, tram, train, and bus.
+- **timestamp**: a string in the following format: DD-MM-YYYY hh:mm:ss
+- **heading**: an angle between 0 (True North) and 359 that indicates where the vehicle's heading.
+
+Please note that this API is only for public vehicles in Snowdonia, so any co-ordinates outside of 
+Snowdonia's 50km radius will yield an error. See snowdonia.register_emission(vehicleID) below for details.
+
 """
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -93,11 +115,10 @@ def distance_from_center(latitude, longitude):
 
     Even though there exists the Haversine formula that calculates the distance
     between two points on a sphere, and it is less computationally expensive
-    than Vincenty (no iterations), the radius of Snowdonia is 50km, and
-    the Haversine formula, when calculating distances on the Earth, can have
-    an error up to 0.55%, though generally below 0.3%, but 0.3% is still
-    22km, so Vincenty provides greater accuracy that is actually needed in this
-    situation.
+    than Vincenty (no iterations), the Haversine formula, when calculating distances
+    on the Earth, can have an error up to 0.55%, though generally below 0.3%, 
+    so Vincenty provides greater accuracy that is actually needed in this situation,
+    where exactly where vehicles were is valuable data.
 
     More on how Vincenty's formula works:
     https://en.wikipedia.org/wiki/Vincenty's_formulae
@@ -218,7 +239,7 @@ def register_emission(vehicleID):
     except ValueError:
         return 'Invalid value(s) provided.', 400
     except Exception:
-        return 'Unexpected error.', 400
+        return 'Error! Did you send the right data fields?', 400
     return 'Success!', 200
 
 
