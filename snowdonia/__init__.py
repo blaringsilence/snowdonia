@@ -29,9 +29,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from math import radians, sqrt, sin, cos, atan, tan, pi, atan2
 import re
+import os
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 valid_types = ['taxi', 'bus', 'tram', 'train']
