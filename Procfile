@@ -1,1 +1,1 @@
-web: gunicorn snowdonia:app --worker-class gevent
+web: gunicorn snowdonia:app --worker-class gevent -w 10
