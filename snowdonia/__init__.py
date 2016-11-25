@@ -12,7 +12,7 @@ To send data from a vehicle, point to the following link:
 
 Where the vehicle UUID is a valid UUID4.
 
-The request should be of type POST, and the data that are expected by the API are:
+The request should be of type PUT, and the data that are expected by the API are:
 
 - **latitude**: floating point between -90 and 90
 - **longitude**: floating point between -180 and 180
@@ -190,7 +190,7 @@ def home():
     """A brief summary page and the landing page for the app."""
     return render_template('about.html')
 
-@app.route('/api/v1/emission/<vehicleID>', methods=['POST'])
+@app.route('/api/v1/emission/<vehicleID>', methods=['PUT'])
 def register_emission(vehicleID): 
     """The API endpoint that collects emissions.
     URL:
@@ -200,7 +200,7 @@ def register_emission(vehicleID):
     How it works:
 
     - The UUID4 for the vehicle is provided in the API endpoint URL
-    - The data that have to accompany the POST request:
+    - The data that have to accompany the PUT request:
         - latitude: float between -90 and 90
         - longitude: float betwen -180 and 180
         - timestamp: string of the timestamp in the form: DD-MM-YYYY hh:mm:ss
@@ -232,7 +232,6 @@ def register_emission(vehicleID):
                 return 'Vehicle ID or vehicle type is invalid.', 400
             vehicle = Vehicle(vehicleID, vehicle_type)
             db.session.add(vehicle)
-            db.session.commit()
 
         # 3. Register emission
         emission = Emission(vehicleID, latitude, longitude, timestamp, heading)
