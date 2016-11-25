@@ -37,15 +37,13 @@ def generate_point():
     x1 = x / cos(y0)
     return dict(longitude=x1+x0, latitude=y+y0)
 
-def emit(l, vID):
-    l.client.post(url(vID), req_data())
 
 class Emission(TaskSet): 
     def on_start(self):
         self.vID = uuid.uuid4().hex
         self.vType = vType()
-        self.num = numbers[self.vType] + 1
         numbers[self.vType] += 1
+        self.num = numbers[self.vType]
 
     @task(1)
     def emit(self):
@@ -54,7 +52,7 @@ class Emission(TaskSet):
                 ' at ' +\
                 str((data['latitude'], data['longitude']))
         self.client.post(url(self.vID), data, name=lat_long_str)
-        
+
 
 class APIUser(HttpLocust):
     task_set = Emission
