@@ -1,1 +1,1 @@
-waitress-serve --threads=8 --port=$PORT snowdonia:app
+web: waitress-serve --threads=8 --port=$PORT snowdonia:app
