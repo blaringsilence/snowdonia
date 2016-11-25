@@ -35,8 +35,7 @@ def generate_point():
     x = w * cos(t)
     y = w * sin(t)
     x1 = x / cos(y0)
-    # return dict(longitude=x1+x0, latitude=y+y0)
-    return dict(latitude=53.067723, longitude=-4.07495)
+    return dict(longitude=x1+x0, latitude=y+y0)
 
 
 class Emission(TaskSet): 
@@ -58,7 +57,7 @@ class Emission(TaskSet):
 class APIUser(HttpLocust):
     task_set = Emission
     host = 'http://snowdonia-transport.herokuapp.com'
-    min_wait = 10
-    max_wait = 100
+    min_wait = 20000
+    max_wait = 35000
 
 
