@@ -83,6 +83,20 @@ Then head to localhost:8089, and set it to simulate 1000 users with 1000 hatched
 
 The only way this doesn't simulate actual traffic is that the new points for each vehicle are random so not necessarily in the direction their previous point was supposed to be headed.
 
+In order to see which vehicle is emitting what data, the name of the request (in the Locust web interface) is set to:
+::
+	TYPE_OF_VEHICLE-INDEX_OF_VEHICLE at (LATITUDE, LONGITUDE)
+
+Where:
+
+- TYPE_OF_VEHICLE is tram, bus, train, or taxi
+- INDEX_OF_VEHICLE is the index of this vehicle in relation to others of its kind
+
+For example, the 10th bus' emission at lat=53.1725575782715 and long=-4.3319528534938545:
+::
+	bus-10 at (53.1725575782715, -4.3319528534938545)
+
+
 .. _docs:
 
 Docs

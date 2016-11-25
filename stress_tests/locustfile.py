@@ -7,11 +7,11 @@ from locust import HttpLocust, TaskSet, task
 
 snowdonia_center = (53.068889, -4.075556)
 types = ['taxi', 'tram', 'bus', 'train']
+numbers = dict(taxi=0, tram=0, bus=0, train=0)
 
-def req_data():
+def req_data(vType):
     pt = generate_point()
     heading = randint(0, 359)
-    vType = types[randint(0,3)]
     return {
         'type': vType,
         'latitude': pt['latitude'],
@@ -22,6 +22,9 @@ def req_data():
 
 def url(vID):
     return '/api/v1/emission/' + vID
+
+def vType():
+    return types[randint(0,3)]
 
 def generate_point():
     r = 50000/111300
@@ -40,10 +43,17 @@ def emit(l, vID):
 class Emission(TaskSet): 
     def on_start(self):
         self.vID = uuid.uuid4().hex
+        self.vType = vType()
+        self.num = numbers[self.vType] + 1
+        numbers[self.vType] += 1
 
     @task(1)
     def emit(self):
-        self.client.post(url(self.vID), req_data())
+        data = req_data(self.vType)
+        lat_long_str = data['type'] + '-' + str(self.num) +\
+                ' at ' +\
+                str((data['latitude'], data['longitude']))
+        self.client.post(url(self.vID), data, name=lat_long_str)
         
 
 class APIUser(HttpLocust):
