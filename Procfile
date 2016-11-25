@@ -1,1 +1,1 @@
-web: gunicorn -b 0.0.0.0:$PORT snowdonia:app --worker-class gevent -w 5
+web: gunicorn -b 0.0.0.0:$PORT snowdonia:app --worker-class gevent -w 3
