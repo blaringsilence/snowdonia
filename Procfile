@@ -1,1 +1,1 @@
-web: gunicorn snowdonia:app --worker-class gevent -w 5
+waitress-serve --threads=8 --port=$PORT snowdonia:app
