@@ -54,7 +54,35 @@ Installation
 ::
 	>> from snowdonia import app
 	>> app.run()
-	
+
+Testing
+-------
+
+Unit Tests
+~~~~~~~~~~
+Unit tests for the API endpoint (local, postgresql installation/configuration in the app required) are documented below and can be executed as follows:
+::
+	$ chmod a+x test.py
+	$ ./test.py
+
+Stress/Load Tests
+~~~~~~~~~~~~~~~~~~
+For the purposes of simulating the API's behavior, we're using `Locust`_, an open source load testing tool that uses `gevent`_ to swarm a website with requests whose behavior is described in a local configuration file.
+
+To load the testing tool (while in the virtualenv where the requirements are installed)
+::
+	$ cd stress_tests
+	$ locust
+
+Then head to localhost:8089, and set it to simulate 1000 users with 1000 hatched/second. This should simulate the use of the system the way it's intended to be:
+
+- 1000 vehicles
+- Emit every 20 seconds
+- For each vehicle, a UUID
+- For each emission, a location that is within the 50km radius of Snowdonia, a valid type, a valid timestamp, and a valid heading.
+
+The only way this doesn't simulate actual traffic is that the new points for each vehicle are random so not necessarily in the direction their previous point was supposed to be headed.
+
 .. _docs:
 
 Docs
@@ -70,4 +98,6 @@ Docs
 
 .. _Logo Credit: http://www.flaticon.com/authors/baianat
 .. _download page: http://www.postgresql.org/download/
+.. _Locust: http://locust.io/
+.. _gevent: http://www.gevent.org/
 

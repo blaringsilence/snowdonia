@@ -7,8 +7,8 @@ this is the first time you're using this API, the app will register new vehicles
 on the fly. Just send the data and you're golden.
 
 To send data from a vehicle, point to the following link:
-
-    **/api/v1/emissions/<VEHICLE_UUID>**
+::
+    /api/v1/emissions/<VEHICLE_UUID>
 
 Where the vehicle UUID is a valid UUID4.
 
