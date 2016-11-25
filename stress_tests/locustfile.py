@@ -35,7 +35,8 @@ def generate_point():
     x = w * cos(t)
     y = w * sin(t)
     x1 = x / cos(y0)
-    return dict(longitude=x1+x0, latitude=y+y0)
+    # return dict(longitude=x1+x0, latitude=y+y0)
+    return dict(latitude=53.067723, longitude=-4.07495)
 
 
 class Emission(TaskSet): 
@@ -51,13 +52,13 @@ class Emission(TaskSet):
         lat_long_str = data['type'] + '-' + str(self.num) +\
                 ' at ' +\
                 str((data['latitude'], data['longitude']))
-        self.client.post(url(self.vID), data, name=lat_long_str)
+        self.client.put(url(self.vID), data, name=lat_long_str)
 
 
 class APIUser(HttpLocust):
     task_set = Emission
     host = 'http://snowdonia-transport.herokuapp.com'
-    min_wait = 20000
-    max_wait = 20000
+    min_wait = 10
+    max_wait = 100
 
 

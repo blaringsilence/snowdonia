@@ -18,7 +18,7 @@ class TestCase(unittest.TestCase):
 
 	def emit(self, vID, type_val, lat_val, long_val, timestamp, heading):
 		"""Simulate an emission."""
-		return self.app.post('/api/v1/emission/' + vID, data=dict(
+		return self.app.put('/api/v1/emission/' + vID, data=dict(
 				type = type_val,
 				latitude = lat_val,
 				longitude = long_val,
@@ -35,7 +35,7 @@ class TestCase(unittest.TestCase):
 	def test_invalid_data(self):
 		"""Tests an emission with invalid data."""
 		vID = uuid.uuid4().hex
-		rv = self.app.post('/api/v1/emission/' + vID, data=dict(
+		rv = self.app.put('/api/v1/emission/' + vID, data=dict(
 				notSomethingWeWant = 0
 			))
 		assert b'Error!' in rv.data
