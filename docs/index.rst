@@ -74,7 +74,7 @@ To load the testing tool (while in the virtualenv where the requirements are ins
 	$ cd stress_tests
 	$ locust
 
-Then head to localhost:8089, and set it to simulate 1000 users with 1000 hatched/second. This should simulate the use of the system the way it's intended to be:
+Then head to localhost:8089, and set it to simulate 1000 users with 50 new locusts hatched/second. This should simulate the use of the system the way it's intended to be:
 
 - 1000 vehicles
 - Emit every 20 seconds
