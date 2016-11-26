@@ -5,6 +5,8 @@ An API that was mainly built to provide an endpoint to collect emissions contain
 
 This readme offers a quickstart to installing/running the app as well as a guide to the endpoint request format. For the full documentation covering all the code and tests, [read the docs here](http://snowdonia.readthedocs.io/en/latest/).
 
+To see/use the app right now, it's deployed on [Heroku](http://snowdonia-transport.herokuapp.com).
+
 ## Install
 1. Clone the repo.
 
