@@ -140,7 +140,7 @@ def distance_from_center(latitude, longitude):
     lambdaP = 2*pi
     iter_limit = 20
 
-    while abs(lambda1 - lambdaP) > 1e-12 and --iter_limit > 0:
+    while abs(lambda1 - lambdaP) > 1e-12 and iter_limit > 0:
         sin_lambda1 = sin(lambda1)
         cos_lambda1 = cos(lambda1)
         sin_sigma = sqrt((cos_U2 * sin_lambda1) * (cos_U2 * sin_lambda1) +\
@@ -162,6 +162,7 @@ def distance_from_center(latitude, longitude):
                  (cos2_sigma_m + C * cos_sigma *\
                  (-1 + 2 * cos2_sigma_m * cos2_sigma_m))\
                 )
+        iter_limit -= 1
 
     if iter_limit==0:
         return None # failed to converge
@@ -220,8 +221,8 @@ def register_emission(vehicleID):
         timestamp = datetime.strptime(request.form['timestamp'],\
                     '%d-%m-%Y %H:%M:%S')
         heading = int(request.form['heading'])
-        #if not valid_point(latitude, longitude, heading):
-        #    return 'Co-ordinates/heading invalid.', 400
+        if not valid_point(latitude, longitude, heading):
+            return 'Co-ordinates/heading invalid.', 400
 
         # 2. Register vehicle if not registered
         record = Vehicle.query.filter_by(id=vehicleID).first()
