@@ -58,6 +58,6 @@ class APIUser(HttpLocust):
     task_set = Emission
     host = 'http://snowdonia-transport.herokuapp.com'
     min_wait = 20000
-    max_wait = 35000
+    max_wait = 20000
 
 
