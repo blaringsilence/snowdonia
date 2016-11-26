@@ -3,9 +3,11 @@
 
 An API that was mainly built to provide an endpoint to collect emissions containing location and path data from different public transportation vehicles around Snowdonia, per this [challenge](CHALLENGE.md). Emissions are sent every 20 seconds from nearly 1000 vehicles.
 
-This readme offers a quickstart to installing/running the app as well as a guide to the endpoint request format. For the full documentation covering all the code and tests, [read the docs here](http://snowdonia.readthedocs.io/en/latest/).
+This readme offers a quickstart to installing/running the app as well as a guide to the endpoint request format. For the full documentation covering all the code and tests, **[read the docs here](http://snowdonia.readthedocs.io/en/latest/).**
 
-To see/use the app right now, it's deployed on [Heroku](http://snowdonia-transport.herokuapp.com).
+To see/use the app right now, it's **deployed on [Heroku](http://snowdonia-transport.herokuapp.com).**
+
+**For the required testing results and instructions on how to test, see the [readme](stress_tests/README.md) under [stress_tests](stress_tests).**
 
 ## Install
 1. Clone the repo.
