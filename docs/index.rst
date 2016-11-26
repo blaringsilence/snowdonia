@@ -50,10 +50,10 @@ Installation
 	>> from snowdonia import db
 	>> db.create_all()
 
-7. Run the app. In a python interpreter:
+7. Run the app using gunicorn (replace 6 with the suitable number of workers for your testing):
 ::
-	>> from snowdonia import app
-	>> app.run()
+	$ gunicorn snowdonia:app -w 6
+
 
 Testing
 -------
@@ -74,14 +74,18 @@ To load the testing tool (while in the virtualenv where the requirements are ins
 	$ cd stress_tests
 	$ locust
 
+Note that this would run tests on the deployed herokuapp, not locally/on your deployed app. To do that, either change the host in the locustfile, or more easily, add the host parameter:
+::
+	$ locust --host=[YOUR_HOST_AND_PORT_HERE]
+
 Then head to localhost:8089, and set it to simulate 1000 users with 50 new locusts hatched/second. This should simulate the use of the system the way it's intended to be:
 
-- 1000 vehicles
+- 1000 concurrent behicles at max
 - Emit every 20 seconds
 - For each vehicle, a UUID
 - For each emission, a location that is within the 50km radius of Snowdonia, a valid type, a valid timestamp, and a valid heading.
 
-The only way this doesn't simulate actual traffic is that the new points for each vehicle are random so not necessarily in the direction their previous point was supposed to be headed.
+Please note that the new points for each vehicle are random so not necessarily in the direction their previous point was supposed to be headed.
 
 In order to see which vehicle is emitting what data, the name of the request (in the Locust web interface) is set to:
 ::
