@@ -7,7 +7,7 @@ This readme offers a quickstart to installing/running the app as well as a guide
 
 To see/use the app right now, it's **deployed on [Heroku](http://snowdonia-transport.herokuapp.com).**
 
-**For the required testing results and instructions on how to test, see the [readme](stress_tests/README.md) under [stress_tests](stress_tests).**
+**For the required load testing results and instructions on how to test, see the [readme](stress_tests/README.md) under [stress_tests](stress_tests).**
 
 ## Install
 1. Clone the repo.
