@@ -141,7 +141,7 @@ def distance_from_center(latitude, longitude):
     lambdaP = 2*pi
     iter_limit = 20
 
-    while abs(lambda1 - lambdaP) > 1e-12 and --iter_limit > 0:
+    while abs(lambda1 - lambdaP) > 1e-12 and iter_limit > 0:
         sin_lambda1 = sin(lambda1)
         cos_lambda1 = cos(lambda1)
         sin_sigma = sqrt((cos_U2 * sin_lambda1) * (cos_U2 * sin_lambda1) +\
@@ -163,6 +163,7 @@ def distance_from_center(latitude, longitude):
                  (cos2_sigma_m + C * cos_sigma *\
                  (-1 + 2 * cos2_sigma_m * cos2_sigma_m))\
                 )
+        iter_limit -= 1
 
     if iter_limit==0:
         return None # failed to converge
