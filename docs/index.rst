@@ -31,7 +31,7 @@ Installation
 2. Install virtualenv and activate it
 ::
 	$ pip install virtualenv
-	$ virtualenv --python=3.4 venv
+	$ virtualenv -p python3 venv
 	$ . venv/bin/activate
 
 3. Install requirements

@@ -20,7 +20,7 @@ To see/use the app right now, it's **deployed on [Heroku](http://snowdonia-trans
 
   ```bash
     $ pip install virtualenv
-    $ virtualenv --python=3.4 venv
+    $ virtualenv -p python3 venv
     $ . venv/bin/activate
   ```
 (to deactivate the virtualenv, just run `$ deactivate`)
